@@ -24,7 +24,6 @@ struct comp {
 class graph
 {
 	private :
-		int **matrix;
 		vector < pair<int,int> > *list; // first untuk vertex
 		int N_vertex;
 		pair<int,int> vertex[30]; // first untuk jarak terpendek,
@@ -36,46 +35,14 @@ class graph
 			N_vertex = N;
 			list = new vector<pair<int,int> > [N+2]; // adjacency list
 
-			matrix = new int *[N+2];
-			for (int i=0; i<N+2; i++) {
-				matrix[i] = new int[N+2];
-			}
-			for (int i=0; i<N+2; i++) { 	// atur matrix ke 0
+			for (int i=0; i<N+2; i++) { 	// atur vertex ke integer max
 				vertex[i+1].first = INT_MAX;
-				for (int j=0; j<N+2; j++) {
-					matrix[i][j] = 0;
-				}
 			}
 			memset(visit, false, sizeof(visit));
 		}
 		void addEdge (int from, int to, int dist) {
 			list[from].push_back(make_pair(to,dist));
-			matrix[from][to] = dist;
 			list[to].push_back(make_pair(from,dist));
-			matrix[to][from] = dist;
-		}
-
-		void printMatrix () {
-
-			int i;
-			printf("    ");
-			for (i=1; i<=N_vertex; i++) printf("%c   ",alphabet[i]);
-			puts("");
-			printf("    ");
-			for (i=1; i<=N_vertex; i++) printf("-   ");
-			puts("");
-			for (i=1; i<=N_vertex; i++)
-			{
-				printf("%c | ",alphabet[i]);
-				for (int j=1; j<=N_vertex; j++) {
-					printf("%d",matrix[i][j]);
-
-					if (matrix[i][j] >= 10 && matrix[i][j] <=99) printf("  ");
-					else if (matrix[i][j] >= 100 && matrix[i][j] <=999) printf(" ");
-					else if (matrix[i][j] < 10) printf("   ");
-				}
-				puts("");
-			}
 		}
 
 		void printList () {
