@@ -141,7 +141,7 @@ class graph
 				now = vertex[now].second;
 			}
 			st.push(goal);
-			printf(" melalui ");
+			printf("\nThe route : ");
 			while (!st.empty()) {
 				now = st.top();
 				printf("%c",alphabet[now]);
@@ -151,9 +151,9 @@ class graph
 		}
 
 		void findShortestPath (int from, int to) {
-			if (!visit[to]) printf("<> Tidak ditemukan rute dari %c menuju %c\n",alphabet[from], alphabet[to]);
+			if (!visit[to]) printf("There is no route found from %c to %c\n",alphabet[from], alphabet[to]);
 			else {
-				printf("<> Rute terpendek dari %c menuju %c adalah %d",alphabet[from], alphabet[to], vertex[to].first);
+				printf("The shortest distance from %c to %c is %d",alphabet[from], alphabet[to], vertex[to].first);
 				findPath(to, from);
 				puts("");
 			}
@@ -167,56 +167,51 @@ int main ()
 	char u, v;
 
 	do {
-		printf("Masukkan jumlah vertex pada graf : ");
+		printf("Insert amount of cities : ");
 		cin >> N_vertex;
-		if (N_vertex < 1) puts("[Jumlah vertex tidak boleh negatif atau 0!]\n");
-		else if (N_vertex > 26) puts("[Jumlah vertex maksimal 26!]\n");
+		if (N_vertex < 1) puts("[Cities amount can't be negative or zero!]\n");
+		else if (N_vertex > 26) puts("[Cities amount can't be greater than 26!]\n");
 	} while(N_vertex < 1 || N_vertex > 26);
 
 	do {
-		printf("Masukkan jumlah edge pada graf   : ");
+		printf("Insert amount of roads : ");
 		cin >> M_edge;
-		if (M_edge < 0) puts("[Jumlah edge tidak boleh negatif!]\n");
+		if (M_edge < 0) puts("[Roads number can't be negative or zero!]\n");
 	} while(M_edge < 0);
 
 	printf("\n");
-	puts("Setiap vertex dinotasikan dengan huruf abjad kapital sebagai berikut :");
+	puts("Each cities is represented by a capital letter :");
 
 	int i;
 	for (i=1; i<=N_vertex; i++) {
 		cout << alphabet[i] << " ";
 	}
-	printf("\n\nUntuk setiap edge, format masukan berupa U, V dan X (dipisahkan spasi).\nDimana vertex U terhubung ke vertex V dengan jarak X.\n\n");
+	printf("\n\nInsert two cities and the distance between.\nThe format is A B X (separated by space), which distance between Cities A and B is X kilometers.\n\n");
 
 	graph G(N_vertex);
 
 	for (int i=1; i<=M_edge; i++) {
 		do {
-			printf("Edge %d : ",i);
+			printf("Road %d : ",i);
 			cin >> u >> v >> x;
-			if (x < 0) printf("[Jarak X tidak boleh negatif!]\n\n");
-			else if (x >= 999) printf("[Jarak X harus kurang dari 1000!]\n\n");
-		} while (x < 0 || x >= 999);
+			if (x < 0) printf("[Distance X can't be negative or zero]\n\n");
+			else if (x > 999) printf("[Distance X must be less than 1000!]\n\n");
+		} while (x < 0 || x > 999);
 
 		a = alpha[u];
 		b = alpha[v];
 		G.addEdge(a,b,x);
 	}
 	printf("\n----------------------------------------------------------------------");
-	printf("\nRepresentasi graf menggunakan Adjacency Matrix adalah sebagai berikut :\n\n");
-	G.printMatrix();
-
-	printf("\n----------------------------------------------------------------------");
-	printf("\nRepresentasi graf menggunakan Adjacency List adalah sebagai berikut :\n\n");
+	printf("\nList of each city with distances with adjacent cities:\n\n");
 	G.printList();
 	printf("\n======================================================================\n");
 
-	printf("\nMenentukan rute terpendek dari titik awal\nTentukan titik awal vertex : ");
+	printf("\nStarting City : ");
 	cin >> u;
 	a = alpha[u];
 	G.findShortestPathFrom(a);
 
-	printf("\nHasilnya adalah sebagai berikut :\n");
 	for (int i=1; i<=N_vertex; i++) {
 		if (i == a) continue;
 		G.findShortestPath(a,i);
