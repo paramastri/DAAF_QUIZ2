@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include<Windows.h>
 using namespace std;
 
 typedef struct nd {
@@ -54,11 +55,11 @@ class graph
 			for (int i=1; i<=N_vertex; i++)
 			{
 				if (list[i].empty()) continue;
-				printf("%c -> ",alphabet[i]);
+				printf("from city %c , you will arrive to the city = ",alphabet[i]);
 				for (int j=0; j<list[i].size(); j++) {
 					int x = list[i][j].first;
 					int y = list[i][j].second;
-					printf("%c(%d) ",alphabet[x],y);
+					printf("%c with cost %d . ",alphabet[x],y);
 				}
 				puts("");
 			}
@@ -113,11 +114,11 @@ class graph
 				now = vertex[now].second;
 			}
 			st.push(goal);
-			printf("\nThe route : ");
+			printf("\n Route you will pass : ");
 			while (!st.empty()) {
 				now = st.top();
 				printf("%c",alphabet[now]);
-				if (now != from) printf(" -> ");
+				if (now != from) printf(" ==> ");
 				st.pop();
 			}
 		}
@@ -125,7 +126,8 @@ class graph
 		void findShortestPath (int from, int to) {
 			if (!visit[to]) printf("There is no route found from %c to %c\n",alphabet[from], alphabet[to]);
 			else {
-				printf("The shortest distance from %c to %c is %d",alphabet[from], alphabet[to], vertex[to].first);
+				printf("\n======================================================================\n");
+				printf("The shortest distance from %c to %c is %d \n",alphabet[from], alphabet[to], vertex[to].first);
 				findPath(to, from);
 				puts("");
 			}
@@ -134,36 +136,54 @@ class graph
 
 int main ()
 {
+	system("color 7C");
+	printf("=============================\n");
+	printf(" WELCOME TO APPLICATION \n");
+	printf("=============================\n\n\n");
+	Sleep(1000);
+	printf("You will get easier to go everywhere you want most effective ! \n\n");
+	printf("=========Lets try it now !========== \n\n");
+	
 	buildAlphabet();
 	int N_vertex, M_edge, x, a, b;
 	char u, v;
 
 	do {
-		printf("Insert amount of cities : ");
+		Sleep(2000);
+		system("cls");
+			printf("\n======================================================================");
+		printf("\n\nInsert amount of cities : ");
 		cin >> N_vertex;
 		if (N_vertex < 1) puts("[Cities amount can't be negative or zero!]\n");
 		else if (N_vertex > 26) puts("[Cities amount can't be greater than 26!]\n");
 	} while(N_vertex < 1 || N_vertex > 26);
 
 	do {
-		printf("Insert amount of roads : ");
+		printf("\n======================================================================");
+		printf("\n\nInsert amount of roads : ");
 		cin >> M_edge;
-		if (M_edge < 0) puts("[Roads number can't be negative or zero!]\n");
+		if (M_edge < 0)puts("[Roads number can't be negative or zero!]\n");
+	
 	} while(M_edge < 0);
 
 	printf("\n");
+	printf("\n======================================================================\n");
 	puts("Each cities is represented by a capital letter :");
 
 	int i;
 	for (i=1; i<=N_vertex; i++) {
+	
 		cout << alphabet[i] << " ";
 	}
+	printf("\n======================================================================");
+	Sleep(200);
 	printf("\n\nInsert two cities and the distance between.\nThe format is A B X (separated by space), which distance between Cities A and B is X kilometers.\n\n");
 
 	graph G(N_vertex);
 
 	for (int i=1; i<=M_edge; i++) {
 		do {
+			printf("\n---\n");
 			printf("Road %d : ",i);
 			cin >> u >> v >> x;
 			if (x < 0) printf("[Distance X can't be negative or zero]\n\n");
@@ -174,12 +194,20 @@ int main ()
 		b = alpha[v];
 		G.addEdge(a,b,x);
 	}
-	printf("\n----------------------------------------------------------------------");
-	printf("\nList of each city with distances with adjacent cities:\n\n");
+	
+	Sleep(1000);
+	system("cls");
+	printf("\n======================================================================");
+	printf("\nLIST OF EACH CITY WITH DISTANCES WITH ADJACENT CITIES\n\n");
 	G.printList();
 	printf("\n======================================================================\n");
+	printf("\n Now, you can think at what Starting City you will start going\n");
 
-	printf("\nStarting City : ");
+	Sleep(5000);
+	system("cls");
+	printf("\n WE WILL FIND THE ROUTES FOR YOU WITH THE SHORTEST DISTANCE \n\n");
+	printf("\n======================================================================");
+	printf("\nInput Starting City : ");
 	cin >> u;
 	a = alpha[u];
 	G.findShortestPathFrom(a);
@@ -190,4 +218,3 @@ int main ()
 	}
 	return 0;
 }
-
