@@ -24,23 +24,28 @@ struct comp {
 class graph
 {
 	private :
-		vector < pair<int,int> > *list; // first untuk vertex
+		// first pair declares vertex
+		vector < pair<int,int> > *list; 
 		int N_vertex;
-		pair<int,int> vertex[30]; // first untuk jarak terpendek,
-                                //second untuk vertex sebelumnya
+		// first pair declares shorterst path
+   		// second pair declares previous vertex
+		pair<int,int> vertex[30];
 		bool visit[30];
 
 	public :
 		graph(int N) {
 			N_vertex = N;
-			list = new vector<pair<int,int> > [N+2]; // adjacency list
-
-			for (int i=0; i<N+2; i++) { 	// atur vertex ke integer max
+			// adjacency list
+			list = new vector<pair<int,int> > [N+2];
+			
+			// set vertex to INT_MAX
+			for (int i=0; i<N+2; i++) { 	
 				vertex[i+1].first = INT_MAX;
 			}
 			memset(visit, false, sizeof(visit));
 		}
 		void addEdge (int from, int to, int dist) {
+			// set the graph is an undirected graph
 			list[from].push_back(make_pair(to,dist));
 			list[to].push_back(make_pair(from,dist));
 		}
