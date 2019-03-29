@@ -169,7 +169,7 @@ void checkRoute (int n) {
 
 To determine the shortest path of the origin vertex to other points, the algorithm used is the Dijkstra algorithm. The implementation of this algorithm refers to the following pseudocode:
 
-![alt text](https://github.com/paramastri/SoalShift_modul2_F10/blob/master/dijkstra_pseudocode.png)
+![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/dijkstra_pseudocode.png)
 
 Based on the pseudocode above, the application of the Dijkstra algorithm uses the priority queue structure and requires the origin vertex as its main component. Implementation in this program is shown in:
 
