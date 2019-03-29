@@ -36,16 +36,19 @@ Edge in this graph connects two vertices in the same direction (directed) and ea
 
 #### Code Analysis
 
+-LIBRARY-
 The library we use is:
 
 ```cpp
+#include<Windows.h>
 #include<bits/stdc++.h>
 using namespace std;
 ```
+#include<bits/stdc++.h> is an implementation file for a precompiled header whereas,
+#include<bits/stdc++.h> is Windows-specific header file for the C and C++ programming languages which contains declarations for all of the functions in the Windows API, all the common macros used by Windows programmers, and all the data types used by the various functions and subsystems.
 
-We declare the struct, which is a composite data type (or record) declaration that defines a physically grouped list of variables to be placed under one name in a block of memory, allowing the different variables to be accessed via a single pointer, or the struct declared name which returns the same address.
-
-The variable that defined within the struct nd are vertex, dist, and prev.
+-STRUCT-
+Then, We declare the struct nd with contains vertex, dist, and prev, which is a composite data type (or record) declaration that defines a physically grouped list of variables to be placed under one name in a block of memory, allowing the different variables to be accessed via a single pointer, or the struct declared name which returns the same address.
 
 The vertex attribute functions to store the current vertex information, dist to store the shortest route information to this vertex and prev to store the travel vertex information before reaching this vertex.
 
@@ -57,6 +60,7 @@ typedef struct nd {
 } node ;
 ```
 
+-BUILD ALPHABET FUNCTION-
 In this program, even though the vertex is denoted using the letters of the alphabet, the representation of the letters of the alphabet still uses numbers. For example letter A is represented by number 1, B by number 2 and so on until Z by number 26.
 This is to simplify the computing process later.
 
@@ -73,7 +77,9 @@ void buildAlphabet ()
 	}
 }
 ```
-We declare a struct comp. The variable that defined within the struct comp are boolean operator for node A and node B that will return to distance of A is greater that the distance of B.
+
+-STRUCT COMPARE-
+We declare a struct comp which contains boolean operator for node A and so node B that will return to distance of A is greater that the distance of B.
 
 ```cpp
 struct comp {
@@ -82,17 +88,17 @@ struct comp {
 	}
 };
 ```
-We declare a class to build the graph.
 
+-CLASS,PRIVATE,AND PUBLIC-
+We build the graph with declaring a class which inside of the class, there are some functions.
 ```cpp
 class graph ()
 ```
 
-Inside the class, there are functions.
+Public and private are protection mechanisms for our classes in C++.
+If a member variable/function is public, it can be used anywhere within the class. If a member variable/function is private, it can only be accessed by member functions of that class.
 
-Public and private are protection mechanisms for our classes in C++. If a member variable/function is public, it can be used anywhere within the class. If a member variable/function is private, it can only be accessed by member functions of that class.
-
-In private, we have the code below, that represents:
+For private, we have the code below, that represents:
 
 * This code snippet explains how adjacency lists are implemented.
 * The Adjacency list is created using STL vector which contains pair <int, int>. The first element for storing vertex information and the second element for storing weight information (distance traveled).
@@ -125,8 +131,10 @@ graph(int N) {
 	memset(visit, false, sizeof(visit));
 }
 ```
-* To add edge, use the addEdge() function that takes parameters from, to, and dist.
-* From is the origin vertex from the edge, to is the destination vertex of the edge and dist is the distance from the origin vertex to the destination vertex.
+
+-ADD EDGE FUNCTION-
+To add edge, use the addEdge() function that takes parameters from, to, and dist.
+From = the origin vertex from the edge, to = the destination vertex of the edge , whereas dist = the distance from the origin vertex to the destination vertex.
 
 ```cpp
 void addEdge (int from, int to, int dist) {
@@ -134,27 +142,37 @@ void addEdge (int from, int to, int dist) {
 	list[to].push_back(make_pair(from,dist));
 }
 ```
-We display the adjacency list in this code below, created using a vector containing <int, int> pair. The first element (first) is the vertex itself and the second (second) is the weight (distance).
+
+-PRINT LIST FUNCTION-
+We display the adjacency list with make function printList() as this code below, with using a vector containing <int, int> pair. The first element (first) is the vertex itself and the second (second) is the weight (distance).
+
+The output display of the adjacency list is a list with the format:
+From city 𝑨 , will arrive to the city 𝑩_𝟏 with cost (𝒙_𝟏) .  𝑩_𝟐 with cost (𝒙_𝟐) . 𝑩_𝟑 with cost (𝒙_𝟑) ... 𝑩_𝒊 with cost (𝒙_𝒊)
+Where A is the origin vertex and each B is a vertex connected with distance x
 
 ```cpp
-void printList () {
-	for (int i=1; i<=N_vertex; i++)
-	{
-		if (list[i].empty()) continue;
-		printf("%c -> ",alphabet[i]);
-		for (int j=0; j<list[i].size(); j++) {
-			int x = list[i][j].first;
-			int y = list[i][j].second;
-			printf("%c(%d) ",alphabet[x],y);
+		void printList () {
+			for (int i=1; i<=N_vertex; i++)
+			{
+				if (list[i].empty()) continue;
+				printf("from city %c , you will arrive to the city = ",alphabet[i]);
+				for (int j=0; j<list[i].size(); j++) {
+					int x = list[i][j].first;
+					int y = list[i][j].second;
+					printf("%c with cost %d . ",alphabet[x],y);
+				}
+				puts("");
+			}
+
 		}
-			puts("");
-	}
 }
 ```
 #### DFS Implementation Part
 
-The checkRoute () function below uses the Depth-First Search (DFS) method that utilizes recursive capabilities. If the status of a vertex is false, it means that the vertex has never been visited / there is no route to get to the vertex. This function aims to find which points can be addressed (available routes) and which cannot be reached from the origin.
+-CHECK ROUTE FUNCTION-
+After the Dijkstra process is done, the next process is to check the route using the checkRoute () function. This function aims to find which points can be addressed (available routes) and which cannot be reached from the origin.
 
+In its implementation, the checkRoute () function uses the Depth-First Search (DFS) method that utilizes recursive capabilities. If the status of a vertex is false, it means that the vertex has never been visited / there is no route to get to the vertex.
 ```cpp
 void checkRoute (int n) {
 	if (visit[n]) return;
@@ -167,13 +185,15 @@ void checkRoute (int n) {
 
 #### Dijkstra Implementation Part
 
+-PSEUDOCODE DIJKSTRA-
 To determine the shortest path of the origin vertex to other points, the algorithm used is the Dijkstra algorithm. The implementation of this algorithm refers to the following pseudocode:
 
 ![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/dijkstra_pseudocode.png)
 
+-FIND SHORTEST PATH FORM FUNCTION-
 Based on the pseudocode above, the application of the Dijkstra algorithm uses the priority queue structure and requires the origin vertex as its main component. Implementation in this program is shown in:
 
-By default, STL priority queue on C ++ will prioritize the largest element as top () (Biggest First Out). However, because the Dijkstra algorithm requires the smallest element (the smallest mileage) on the priority queue, it can be modified on the priority queuenya.
+We use priority queue here and it contains elements called nodes. The node is a user-defined data type that contains attributes in struct nd
 
 ```cpp
 void findShortestPathFrom (int A) {
@@ -225,10 +245,11 @@ if (cost + dist_now < vertex[v_next].first) {
 	checkRoute(A);
 }
 ```
-The findPath() function is to find a path that tells which vertex to pass in order to reach the destination point from the starting point.
+-FIND PATH FUNCTION-
+After Dijkstra process have been done, we create The findPath() function to find a path that tells which vertex to pass in order to reach the destination point from the starting point.
 
 ```cpp
-void findPath (int from, int goal) {
+		void findPath (int from, int goal) {
 			stack <int> st;
 			int now = from;
 			while (now != goal) {
@@ -236,23 +257,25 @@ void findPath (int from, int goal) {
 				now = vertex[now].second;
 			}
 			st.push(goal);
-			printf("\nThe route : ");
+			printf("\n Route you will pass : ");
 			while (!st.empty()) {
 				now = st.top();
 				printf("%c",alphabet[now]);
-				if (now != from) printf(" -> ");
+				if (now != from) printf(" ==> ");
 				st.pop();
 			}
 		}
 ```
 
-Then we display the shortest path by this function below:
+-FIND SHORTEST PATH FUNCTION-
+Last, we create FindShortestPath function to find a path that tells which vertex to pass in order to reach the destination point from the starting point
 
 ```cpp
-void findShortestPath (int from, int to) {
+		void findShortestPath (int from, int to) {
 			if (!visit[to]) printf("There is no route found from %c to %c\n",alphabet[from], alphabet[to]);
 			else {
-				printf("The shortest distance from %c to %c is %d",alphabet[from], alphabet[to], vertex[to].first);
+				printf("\n======================================================================\n");
+				printf("The shortest distance from %c to %c is %d \n",alphabet[from], alphabet[to], vertex[to].first);
 				findPath(to, from);
 				puts("");
 			}
@@ -260,3 +283,5 @@ void findShortestPath (int from, int to) {
 ```
 
 #### Main Program
+
+
