@@ -138,7 +138,7 @@ int main ()
 {
 	system("color 7C");
 	printf("=============================\n");
-	printf(" WELCOME TO TOUR GUIDE APPLICATION \n");
+	printf(" WELCOME TO APPLICATION \n");
 	printf("=============================\n\n\n");
 	Sleep(1000);
 	printf("You will get easier to go everywhere you want most effective ! \n\n");
