@@ -94,6 +94,7 @@ struct comp {
 ```
 
 -CLASS,PRIVATE,AND PUBLIC-
+
 We build the graph with declaring a class which inside of the class, there are some functions.
 ```cpp
 class graph ()
