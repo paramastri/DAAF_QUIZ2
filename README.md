@@ -38,7 +38,7 @@ Edge in this graph connects two vertices in the same direction (directed) and ea
 
 The library we use is:
 
-```
+```cpp
 #include<bits/stdc++.h>
 using namespace std;
 ```
@@ -51,7 +51,7 @@ The vertex attribute functions to store the current vertex information, dist to 
 
 This attribute information prev will later be used to trace the route (plot).
 
-```
+```cpp
 typedef struct nd {
 	int vertex, dist, prev;
 } node ;
@@ -62,7 +62,7 @@ This is to simplify the computing process later.
 
 This process is shown in the buildAlphabet() function
 
-```
+```cpp
 char alphabet[28];
 map <char,int> alpha;
 void buildAlphabet ()
@@ -75,7 +75,7 @@ void buildAlphabet ()
 ```
 We declare a struct comp. The variable that defined within the struct comp are boolean operator for node A and node B that will return to distance of A is greater that the distance of B.
 
-```
+```cpp
 struct comp {
 	bool operator () (node A, node B) {
 		return A.dist > B.dist;
@@ -84,7 +84,7 @@ struct comp {
 ```
 We declare a class to build the graph.
 
-```
+```cpp
 class graph ()
 ```
 
@@ -97,7 +97,7 @@ In private, we have the code below, that represents:
 * This code snippet explains how adjacency lists are implemented.
 * The Adjacency list is created using STL vector which contains pair <int, int>. The first element for storing vertex information and the second element for storing weight information (distance traveled).
 
-```
+```cpp
 private :
     // first pair declares vertex
 		vector < pair<int,int> > *list; 
@@ -110,7 +110,7 @@ private :
 
 In public, we have the code below, that in this code, we build an adjacency list in a new vector and set the vertex into integer max (INT_MAX). Hence we have memset which contains of variables (visit, false, and the size of visit).
 
-```
+```cpp
 public:
 graph(int N) {
 	N_vertex = N;
@@ -128,7 +128,7 @@ graph(int N) {
 * To add edge, use the addEdge() function that takes parameters from, to, and dist.
 * From is the origin vertex from the edge, to is the destination vertex of the edge and dist is the distance from the origin vertex to the destination vertex.
 
-```
+```cpp
 void addEdge (int from, int to, int dist) {
 	list[from].push_back(make_pair(to,dist));
 	list[to].push_back(make_pair(from,dist));
@@ -136,7 +136,7 @@ void addEdge (int from, int to, int dist) {
 ```
 We display the adjacency list in this code below, created using a vector containing <int, int> pair. The first element (first) is the vertex itself and the second (second) is the weight (distance).
 
-```
+```cpp
 void printList () {
 	for (int i=1; i<=N_vertex; i++)
 	{
@@ -155,7 +155,7 @@ void printList () {
 
 The checkRoute () function below uses the Depth-First Search (DFS) method that utilizes recursive capabilities. If the status of a vertex is false, it means that the vertex has never been visited / there is no route to get to the vertex. This function aims to find which points can be addressed (available routes) and which cannot be reached from the origin.
 
-```
+```cpp
 void checkRoute (int n) {
 	if (visit[n]) return;
 	visit[n] = true;
@@ -175,7 +175,7 @@ Based on the pseudocode above, the application of the Dijkstra algorithm uses th
 
 By default, STL priority queue on C ++ will prioritize the largest element as top () (Biggest First Out). However, because the Dijkstra algorithm requires the smallest element (the smallest mileage) on the priority queue, it can be modified on the priority queuenya.
 
-```
+```cpp
 void findShortestPathFrom (int A) {
 	priority_queue < node, vector<node>, comp > pQ;
 	vertex[A].first = 0;
@@ -188,7 +188,7 @@ Then, the next implementation of Pseudocode is as follows:
 
 This section is to extract the smallest value (the distance to the smallest vertex i)
 
-```
+```cpp
 while (!pQ.empty()) {
 temp = pQ.top();
 pQ.pop();
@@ -199,7 +199,7 @@ for (int i=0; i<sze; i++)
 ```
 This section is to relax each neighbor from the vertex being extracted.
 
-```
+```cpp
 {
 	int cost = list[v_now][i].second;
 	int v_next = list[v_now][i].first;
@@ -208,7 +208,7 @@ This part is a relax process. Here, if the total distance traveled + the weight 
 
 Here also when doing relax, a process is performed to save the previous travel vertex to the vertex v.
 
-```	
+```cpp	
 if (cost + dist_now < vertex[v_next].first) {
 		vertex[v_next].first = cost + dist_now;
 		vertex[v_next].second = v_now;
@@ -227,7 +227,7 @@ if (cost + dist_now < vertex[v_next].first) {
 ```
 The findPath() function is to find a path that tells which vertex to pass in order to reach the destination point from the starting point.
 
-```
+```cpp
 void findPath (int from, int goal) {
 			stack <int> st;
 			int now = from;
@@ -248,7 +248,7 @@ void findPath (int from, int goal) {
 
 Then we display the shortest path by this function below:
 
-```
+```cpp
 void findShortestPath (int from, int to) {
 			if (!visit[to]) printf("There is no route found from %c to %c\n",alphabet[from], alphabet[to]);
 			else {
