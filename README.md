@@ -47,6 +47,10 @@ We declare the struct, which is a composite data type (or record) declaration th
 
 The variable that defined within the struct nd are vertex, dist, and prev.
 
+The vertex attribute functions to store the current vertex information, dist to store the shortest route information to this vertex and prev to store the travel vertex information before reaching this vertex.
+
+This attribute information prev will later be used to trace the route (plot).
+
 ```
 typedef struct nd {
 	int vertex, dist, prev;
@@ -147,4 +151,112 @@ void printList () {
 	}
 }
 ```
+#### DFS Implementation Part
 
+The checkRoute () function below uses the Depth-First Search (DFS) method that utilizes recursive capabilities. If the status of a vertex is false, it means that the vertex has never been visited / there is no route to get to the vertex. This function aims to find which points can be addressed (available routes) and which cannot be reached from the origin.
+
+```
+void checkRoute (int n) {
+	if (visit[n]) return;
+	visit[n] = true;
+	for (int i=0; i<list[n].size(); i++) {
+	checkRoute(list[n][i].first);
+	}
+}
+```
+
+#### Dijkstra Implementation Part
+
+To determine the shortest path of the origin vertex to other points, the algorithm used is the Dijkstra algorithm. The implementation of this algorithm refers to the following pseudocode:
+
+<GAMBAR PSEUDOCODE>
+
+Based on the pseudocode above, the application of the Dijkstra algorithm uses the priority queue structure and requires the origin vertex as its main component. Implementation in this program is shown in:
+
+By default, STL priority queue on C ++ will prioritize the largest element as top () (Biggest First Out). However, because the Dijkstra algorithm requires the smallest element (the smallest mileage) on the priority queue, it can be modified on the priority queuenya.
+
+```
+void findShortestPathFrom (int A) {
+	priority_queue < node, vector<node>, comp > pQ;
+	vertex[A].first = 0;
+	vertex[A].second = A;
+	node temp;
+	temp.vertex = A; temp.dist = 0; temp.prev = A;
+	pQ.push(temp);
+```
+Then, the next implementation of Pseudocode is as follows:
+
+This section is to extract the smallest value (the distance to the smallest vertex i)
+
+```
+while (!pQ.empty()) {
+temp = pQ.top();
+pQ.pop();
+
+int v_now = temp.vertex, dist_now = temp.dist;
+int sze = list[v_now].size();
+for (int i=0; i<sze; i++)
+```
+This section is to relax each neighbor from the vertex being extracted.
+
+```
+{
+	int cost = list[v_now][i].second;
+	int v_next = list[v_now][i].first;
+```
+This part is a relax process. Here, if the total distance traveled + the weight to a vertex v is smaller than the current distance to the vertex v then relax.
+
+Here also when doing relax, a process is performed to save the previous travel vertex to the vertex v.
+
+```	
+if (cost + dist_now < vertex[v_next].first) {
+		vertex[v_next].first = cost + dist_now;
+		vertex[v_next].second = v_now;
+	
+		node x;
+		x.dist = vertex[v_next].first;
+		x.prev = v_now;
+		x.vertex = v_next;
+		pQ.push(x);
+			}
+		}
+	}
+
+	checkRoute(A);
+}
+```
+The findPath() function is to find a path that tells which vertex to pass in order to reach the destination point from the starting point.
+
+```
+void findPath (int from, int goal) {
+			stack <int> st;
+			int now = from;
+			while (now != goal) {
+				st.push(now);
+				now = vertex[now].second;
+			}
+			st.push(goal);
+			printf("\nThe route : ");
+			while (!st.empty()) {
+				now = st.top();
+				printf("%c",alphabet[now]);
+				if (now != from) printf(" -> ");
+				st.pop();
+			}
+		}
+```
+
+Then we display the shortest path by this function below:
+
+```
+void findShortestPath (int from, int to) {
+			if (!visit[to]) printf("There is no route found from %c to %c\n",alphabet[from], alphabet[to]);
+			else {
+				printf("The shortest distance from %c to %c is %d",alphabet[from], alphabet[to], vertex[to].first);
+				findPath(to, from);
+				puts("");
+			}
+		}
+```
+
+#### Main Program
