@@ -412,6 +412,14 @@ last of all, we display representations of Adj.List and djikstra, The last djiks
 		if (i == a) continue;
 		G.findShortestPath(a,i);
 	}
+	
+	Sleep(5000);
+	system("cls");
+	printf("====================================\n");
+	printf("||                                  ||\n");
+	printf("   THANKS FOR USING OUR APPLICATION    \n");
+	printf("||                                  ||\n");
+	printf("====================================\n\n");
 	return 0;		
 ```
 
