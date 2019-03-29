@@ -295,5 +295,124 @@ Last, we create FindShortestPath function to find a path that tells which vertex
 ```
 
 #### Main Program
+-MAIN FUNCTION-
 
+First, we give the appearance of the color of our program where specified by two hex digits.the first corresponds to the background, whereas the second for the foreground. represent with this code :
 
+```cpp
+	system("color 7C");		
+```
+
+We use Sleep function to delay program execution for a given number of seconds
+
+```cpp
+	printf("=============================\n");
+	printf(" WELCOME TO APPLICATION \n");
+	printf("=============================\n\n\n");
+	Sleep(1000);
+	printf("You will get easier to go everywhere you want most effective ! \n\n");
+	printf("=========Lets try it now !========== \n\n");	
+```
+
+We call function buildAlphabet() first and declare some variables. N_vertex = the number of vertices, M_edge = the number of edges, u = vertex source,v = the destination vertex.
+
+```cpp
+	buildAlphabet();
+	int N_vertex, M_edge, x, a, b;
+	char u, v;	
+```
+
+to clear the screen, we use the cls provided on the system shown in this code below, on the other hand, The number of vertices ranges from 1-26 using the name A-Z, so the number of vertices can't be greater than 26. Also it can't be negative or zero.
+
+```cpp
+		do {
+		Sleep(2000);
+		system("cls");
+			printf("\n======================================================================");
+		printf("\n\nInsert amount of cities : ");
+		cin >> N_vertex;
+		if (N_vertex < 1) puts("[Cities amount can't be negative or zero!]\n");
+		else if (N_vertex > 26) puts("[Cities amount can't be greater than 26!]\n");
+	} while(N_vertex < 1 || N_vertex > 26);		
+```
+
+We also make sure the edge always has the value. So, we enter the number of edges on the graph that may not be negative
+
+```cpp
+		do {
+		printf("\n======================================================================");
+		printf("\n\nInsert amount of roads : ");
+		cin >> M_edge;
+		if (M_edge < 0)puts("[Roads number can't be negative or zero!]\n");
+	
+	} while(M_edge < 0);
+```
+
+We denote vertices with capital alphabetical ordered as per the number of vertices shown with this code below :
+
+```cpp
+		printf("\n");
+	printf("\n======================================================================\n");
+	puts("Each cities is represented by a capital letter :");
+
+	int i;
+	for (i=1; i<=N_vertex; i++) {
+	
+		cout << alphabet[i] << " ";
+	}
+	printf("\n======================================================================");
+	Sleep(200);
+	
+```
+
+Input the road with the format u v x as many as the number that has been entered before, where u = vertex source, v = the destination vertex, and x = the distance from u to v. Here, the edge can't be negative or zero also must be less than 1000. after we have inputed all road, then we call addEdge function.
+
+```cpp
+	printf("\n\nInsert two cities and the distance between.\nThe format is A B X (separated by space), which distance between Cities A and B is X kilometers.\n\n");
+
+	graph G(N_vertex);
+
+	for (int i=1; i<=M_edge; i++) {
+		do {
+			printf("\n---\n");
+			printf("Road %d : ",i);
+			cin >> u >> v >> x;
+			if (x < 0) printf("[Distance X can't be negative or zero]\n\n");
+			else if (x > 999) printf("[Distance X must be less than 1000!]\n\n");
+		} while (x < 0 || x > 999);
+
+		a = alpha[u];
+		b = alpha[v];
+		G.addEdge(a,b,x);
+	}
+	
+	Sleep(1000);
+	system("cls");
+	printf("\n======================================================================");	
+```
+
+last of all, we display representations of Adj.List and djikstra, The last djikstra results show the cost and the shortest route with calling findShortestPath function
+
+```cpp
+	printf("\nLIST OF EACH CITY WITH DISTANCES WITH ADJACENT CITIES\n\n");
+	G.printList();
+	printf("\n======================================================================\n");
+	printf("\n Now, you can think at what Starting City you will start going\n");
+
+	Sleep(5000);
+	system("cls");
+	printf("\n WE WILL FIND THE ROUTES FOR YOU WITH THE SHORTEST DISTANCE \n\n");
+	printf("\n======================================================================");
+	printf("\nInput Starting City : ");
+	cin >> u;
+	a = alpha[u];
+	G.findShortestPathFrom(a);
+
+	for (int i=1; i<=N_vertex; i++) {
+		if (i == a) continue;
+		G.findShortestPath(a,i);
+	}
+	return 0;		
+```
+
+For has passed doing this report , if there are any mistake, we apologize fully and last we say Thankyou.
