@@ -423,4 +423,14 @@ last of all, we display representations of Adj.List and djikstra, The last djiks
 	return 0;		
 ```
 
+#### OUTPUT PROGRAM
+
+![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output1.png)
+![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output2.png)
+![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output3.png)
+![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output4.png)
+![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output5.png)
+![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output6.png)
+![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output7.png)
+
 For has passed doing this report , if there are any mistake, we apologize fully and last we say Thankyou.
