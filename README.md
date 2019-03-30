@@ -36,7 +36,7 @@ Edge in this graph connects two vertices in the same direction (directed) and ea
 
 #### Code Analysis
 
--LIBRARY-
+LIBRARY
 
 The library we use is:
 
@@ -48,7 +48,7 @@ using namespace std;
 #include<bits/stdc++.h> is an implementation file for a precompiled header whereas,
 #include<bits/stdc++.h> is Windows-specific header file for the C and C++ programming languages which contains declarations for all of the functions in the Windows API, all the common macros used by Windows programmers, and all the data types used by the various functions and subsystems.
 
--STRUCT-
+STRUCT
 
 Then, We declare the struct nd with contains vertex, dist, and prev, which is a composite data type (or record) declaration that defines a physically grouped list of variables to be placed under one name in a block of memory, allowing the different variables to be accessed via a single pointer, or the struct declared name which returns the same address.
 
@@ -62,7 +62,7 @@ typedef struct nd {
 } node ;
 ```
 
--BUILD ALPHABET FUNCTION-
+BUILD ALPHABET FUNCTION
 
 In this program, even though the vertex is denoted using the letters of the alphabet, the representation of the letters of the alphabet still uses numbers. For example letter A is represented by number 1, B by number 2 and so on until Z by number 26.
 This is to simplify the computing process later.
@@ -81,7 +81,7 @@ void buildAlphabet ()
 }
 ```
 
--STRUCT COMPARE-
+STRUCT COMPARE
 
 We declare a struct comp which contains boolean operator for node A and so node B that will return to distance of A is greater that the distance of B.
 
@@ -93,7 +93,7 @@ struct comp {
 };
 ```
 
--CLASS,PRIVATE,AND PUBLIC-
+CLASS, PRIVATE, AND PUBLIC
 
 We build the graph with declaring a class which inside of the class, there are some functions.
 ```cpp
@@ -137,7 +137,7 @@ graph(int N) {
 }
 ```
 
--ADD EDGE FUNCTION-
+ADD EDGE FUNCTION
 
 To add edge, use the addEdge() function that takes parameters from, to, and dist.
 From = the origin vertex from the edge, to = the destination vertex of the edge , whereas dist = the distance from the origin vertex to the destination vertex.
@@ -149,7 +149,7 @@ void addEdge (int from, int to, int dist) {
 }
 ```
 
--PRINT LIST FUNCTION-
+PRINT LIST FUNCTION
 
 We display the adjacency list with make function printList() as this code below, with using a vector containing <int, int> pair. The first element (first) is the vertex itself and the second (second) is the weight (distance).
 
@@ -176,7 +176,7 @@ Where A is the origin vertex and each B is a vertex connected with distance x
 ```
 #### DFS Implementation Part
 
--CHECK ROUTE FUNCTION-
+CHECK ROUTE FUNCTION
 
 After the Dijkstra process is done, the next process is to check the route using the checkRoute () function. This function aims to find which points can be addressed (available routes) and which cannot be reached from the origin.
 
@@ -193,13 +193,13 @@ void checkRoute (int n) {
 
 #### Dijkstra Implementation Part
 
--PSEUDOCODE DIJKSTRA-
+PSEUDOCODE DIJKSTRA
 
 To determine the shortest path of the origin vertex to other points, the algorithm used is the Dijkstra algorithm. The implementation of this algorithm refers to the following pseudocode:
 
 ![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/dijkstra_pseudocode.png)
 
--FIND SHORTEST PATH FORM FUNCTION-
+FIND SHORTEST PATH FORM FUNCTION
 
 Based on the pseudocode above, the application of the Dijkstra algorithm uses the priority queue structure and requires the origin vertex as its main component. Implementation in this program is shown in:
 
@@ -255,7 +255,7 @@ if (cost + dist_now < vertex[v_next].first) {
 	checkRoute(A);
 }
 ```
--FIND PATH FUNCTION-
+FIND PATH FUNCTION
 
 After Dijkstra process have been done, we create The findPath() function to find a path that tells which vertex to pass in order to reach the destination point from the starting point.
 
@@ -278,7 +278,7 @@ After Dijkstra process have been done, we create The findPath() function to find
 		}
 ```
 
--FIND SHORTEST PATH FUNCTION-
+FIND SHORTEST PATH FUNCTION
 
 Last, we create FindShortestPath function to find a path that tells which vertex to pass in order to reach the destination point from the starting point
 
@@ -295,7 +295,8 @@ Last, we create FindShortestPath function to find a path that tells which vertex
 ```
 
 #### Main Program
--MAIN FUNCTION-
+
+MAIN FUNCTION
 
 First, we give the appearance of the color of our program where specified by two hex digits.the first corresponds to the background, whereas the second for the foreground. represent with this code :
 
@@ -391,7 +392,7 @@ Input the road with the format u v x as many as the number that has been entered
 	printf("\n======================================================================");	
 ```
 
-last of all, we display representations of Adj.List and djikstra, The last djikstra results show the cost and the shortest route with calling findShortestPath function
+Last of all, we display representations of Adjacency List and Dijkstra, the last djikstra results show the cost and the shortest route with calling findShortestPath function
 
 ```cpp
 	printf("\nLIST OF EACH CITY WITH DISTANCES WITH ADJACENT CITIES\n\n");
@@ -425,7 +426,7 @@ last of all, we display representations of Adj.List and djikstra, The last djiks
 
 #### OUTPUT PROGRAM
 
-The output for our program when being executed =
+The output for our program when being executed:
 
 ![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output1.PNG)
 
@@ -441,4 +442,4 @@ The output for our program when being executed =
 
 ![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output7.PNG)
 
-For has passed doing this report , if there are any mistake, we apologize fully and last we say Thankyou.
+For has passed doing this report, if there are any mistake, we totally apologize and last we say thankyou very much.
