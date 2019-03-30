@@ -25,7 +25,7 @@ struct comp {
 class graph
 {
 	private :
-		// first pair declares vertex
+		// first pair declares verte
 		vector < pair<int,int> > *list; 
 		int N_vertex;
 		// first pair declares shorterst path
