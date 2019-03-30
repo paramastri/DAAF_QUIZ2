@@ -425,12 +425,20 @@ last of all, we display representations of Adj.List and djikstra, The last djiks
 
 #### OUTPUT PROGRAM
 
+The output for our program when being executed =
+
 ![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output1.PNG)
+
 ![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output2.PNG)
+
 ![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output3.PNG)
+
 ![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output4.PNG)
+
 ![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output5.PNG)
+
 ![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output6.PNG)
+
 ![alt text](https://github.com/paramastri/DAAF_QUIZ2/blob/master/Output7.PNG)
 
 For has passed doing this report , if there are any mistake, we apologize fully and last we say Thankyou.
